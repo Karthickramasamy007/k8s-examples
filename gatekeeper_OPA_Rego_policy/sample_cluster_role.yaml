@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+# This role appies to cluster wide to conrol gatekeeper api
+  name: gatekeeper-policy-editor
+rules:
+  - apiGroups: ["constraints.gatekeeper.sh"]
+    resources: ["constrainttemplates", "k8srequiredannotations", "k8srequiredlabels", "constraints"]
+    verbs: ["get", "list", "create", "update", "patch"]
+  - apiGroups: ["admission.k8s.gatekeeper.sh"]
+    resources: ["gatekeeperadmissionreports"]
+    verbs: ["get", "list"]

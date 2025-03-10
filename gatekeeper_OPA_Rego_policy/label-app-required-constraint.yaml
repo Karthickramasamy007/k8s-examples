@@ -1,0 +1,17 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequiredMetadata
+metadata:
+  name: pod-must-have-metadata
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+  parameters:
+    annotations:
+      - team
+      - owner
+    labels:
+      - app
+      - environment

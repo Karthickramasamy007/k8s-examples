@@ -1,0 +1,7 @@
+apiVersion: database.example.com/v1
+kind: PostgreSQLDatabase
+metadata:
+  name: mydatabase
+spec:
+  dbName: finance_db
+  owner: finance_team

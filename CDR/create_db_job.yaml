@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-database-job
+spec:
+  template:
+    spec:
+      containers:
+        - name: create-db
+          image: postgres:15
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              export PGPASSWORD=$PGPASSWORD;
+              psql -h postgres-service -U postgres -d postgres -c "CREATE DATABASE finance_db OWNER finance_team;"
+          env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: password
+      restartPolicy: Never

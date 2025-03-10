@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: gatekeeper-policy-editor-binding
+# This binds gatekeeper policies to user only who can create/modify gatekeeper policy.
+subjects:
+  - kind: User
+    name: "username"  # Replace with the actual username
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: gatekeeper-policy-editor  # Name of the ClusterRole
+  apiGroup: rbac.authorization.k8s.io
